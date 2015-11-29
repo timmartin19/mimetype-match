@@ -2,11 +2,11 @@ Accept-Header-Match
 ===================
 
 .. image:: https://travis-ci.org/vertical-knowledge/ripozo.svg?branch=master&style=flat
-    :target: https://travis-ci.org/vertical-knowledge/ripozos
+    :target: https://travis-ci.org/vertical-knowledge/mimetype-match
     :alt: test status
 
 .. image:: https://readthedocs.org/projects/ripozo/badge/?version=latest
-    :target: https://ripozo.readthedocs.org/
+    :target: https://mimetype-match.readthedocs.org/
     :alt: Documentation Status
 
 A tool to make parsing Accept headers and finding the appropriate mimetype to
@@ -31,6 +31,11 @@ from the root directory of the package.
 .. code-block:: bash
 
     python setup.py develop
+
+Full Documentation
+------------------
+
+`Documentation <https://mimetype-match.readthedocs.org/>`_
 
 Using the command line interface
 --------------------------------
