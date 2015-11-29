@@ -1,7 +1,9 @@
 Accept-Header-Match
 ===================
 
-A tool to make finding the appropriate mimetype to return easy.
+A tool to make parsing Accept headers and finding the appropriate mimetype to
+return easy.  Simply pass your accept header and the mimetype your server can
+return and it will find the best match.
 
 There is both a programmatic interface to this package as well as a
 command line interface.
@@ -65,3 +67,27 @@ Using the package programmatically is very similar to the cli.
     print(best_match[0].mimetype)
     print(best_match[0].weight)
     print(best_match[1])
+
+
+Versioning
+----------
+
+Prior to version 1.0.0 versioning follows `sentimental
+versioning <http://sentimentalversioning.org/>`_.   Releases after 1.0.0 ollow
+a standard *major.minor.patch* style.
+
+- patch: forwards and backwards compatible
+- minor: backwards compatible
+- major: No guarantees
+
+Contributing
+------------
+
+Want to help out? We'd love it! Github will be the hub of development for mimetype-matching.
+If you have any issues, comments, or complaints post them there.  Additionally, we
+are definitely accepting pull requests (hint: we almost always love more tests and
+documentation).  We do have just a few requests:
+
+* Every method, function, and class should have a thorough docstring
+* There should be at least one unit test for each function and method
+* Keep your pull requests to one issue. (Preferably open an issue on github first for record keeping)
