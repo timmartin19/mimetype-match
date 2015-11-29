@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 from setuptools import setup, find_packages
 
-version = '1.0.0'
+version = '1.0.1.dev0'
 
 setup(
     author='Tim Martin',
@@ -40,7 +40,7 @@ setup(
         'six'
     ],
     keywords='HTTP python Accept Header HTTP_ACCEPT mimetype match Content-Type content type',
-    name='accept-header-match',
+    name='mimetype-match',
     packages=find_packages(include=['accept_header_match']),
     tests_require=[
         'mock',
