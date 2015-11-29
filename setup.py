@@ -37,7 +37,7 @@ setup(
         ]
     },
     install_requires=[],
-    keywords='HTTP python Accept Header HTTP_ACCEPT',
+    keywords='HTTP python Accept Header HTTP_ACCEPT mimetype match Content-Type content type',
     name='accept-header-match',
     packages=find_packages(include=['accept_header_match']),
     tests_require=[
