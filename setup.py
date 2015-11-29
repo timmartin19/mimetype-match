@@ -48,6 +48,6 @@ setup(
         'unittest2'
     ],
     test_suite="tests",
-    url='http://accept-header-match.readthedocs.org/',
+    url='https://github.com/timmartin19/mimetype-match',
     version=version
 )
