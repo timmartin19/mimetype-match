@@ -36,12 +36,15 @@ setup(
             'zest.releaser'
         ]
     },
-    install_requires=[],
+    install_requires=[
+        'six'
+    ],
     keywords='HTTP python Accept Header HTTP_ACCEPT mimetype match Content-Type content type',
     name='accept-header-match',
     packages=find_packages(include=['accept_header_match']),
     tests_require=[
         'mock',
+        'tox',
         'unittest2'
     ],
     test_suite="tests",

@@ -6,21 +6,7 @@ from __future__ import unicode_literals
 import fnmatch
 import sys
 
-# Python 2-3 Compatibility
-try:
-    unicode = unicode
-except NameError:
-    # 'unicode' is undefined, must be Python 3
-    str = str
-    unicode = str
-    bytes = bytes
-    basestring = (str, bytes)
-else:
-    # 'unicode' exists, must be Python 2
-    str = str
-    unicode = unicode
-    bytes = str
-    basestring = basestring
+import six
 
 
 class InvalidMimeType(Exception):
@@ -46,13 +32,13 @@ def _is_more_specific(first, second):
     """
     first = first.split('/')
     second = second.split('/')
-    if first[0] is '*' and not second[0] is '*':
+    if first[0] == '*' and not second[0] == '*':
         return False
-    if not first[0] is '*' and second[0] is '*':
+    if not first[0] == '*' and second[0] == '*':
         return True
-    if first[1] is '*' and not second[1] is '*':
+    if first[1] == '*' and not second[1] == '*':
         return False
-    if not first[1] is '*' and second[1] is '*':
+    if not first[1] == '*' and second[1] == '*':
         return True
     return None
 
@@ -260,7 +246,7 @@ def get_best_match(accept_header, served_types):
         and the string mimetype that the server accepts as the second.
     :rtype: tuple(MimeType, str)|NoneType
     """
-    if not isinstance(accept_header, basestring):
+    if not isinstance(accept_header, six.string_types):
         accept_header = ','.join(accept_header)
     return AcceptHeader(accept_header).get_best_match(served_types)
 
