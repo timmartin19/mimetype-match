@@ -1,6 +1,14 @@
 Accept-Header-Match
 ===================
 
+.. image:: https://travis-ci.org/vertical-knowledge/ripozo.svg?branch=master&style=flat
+    :target: https://travis-ci.org/vertical-knowledge/ripozos
+    :alt: test status
+
+.. image:: https://readthedocs.org/projects/ripozo/badge/?version=latest
+    :target: https://ripozo.readthedocs.org/
+    :alt: Documentation Status
+
 A tool to make parsing Accept headers and finding the appropriate mimetype to
 return easy.  Simply pass your accept header and the mimetype your server can
 return and it will find the best match.
