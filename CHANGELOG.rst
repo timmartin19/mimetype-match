@@ -1,7 +1,7 @@
 CHANGELOG
 `````````
 
-1.0.4 (unreleased)
+1.0.4 (2016-03-09)
 ==================
 
 - Nothing changed yet.
