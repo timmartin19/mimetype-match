@@ -27,7 +27,7 @@ setup(
     description='A tool to make finding the appropriate mimetype to return easy',
     entry_points={
         'console_scripts': [
-            'mimetype-match = accept_header_match:cli'
+            'mimetype-match = mimetype_match:cli'
         ]
     },
     extras_require={
@@ -41,7 +41,7 @@ setup(
     ],
     keywords='HTTP python Accept Header HTTP_ACCEPT mimetype match Content-Type content type',
     name='mimetype-match',
-    packages=find_packages(include=['accept_header_match']),
+    py_modules=['mimetype_match'],
     tests_require=[
         'mock',
         'tox',

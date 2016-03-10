@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 import unittest2
 
-from accept_header_match import _is_more_specific, MimeType, AcceptHeader, InvalidMimeType,\
+from mimetype_match import _is_more_specific, MimeType, AcceptHeader, InvalidMimeType,\
     get_best_match
 
 
