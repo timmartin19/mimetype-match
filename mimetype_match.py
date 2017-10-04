@@ -43,6 +43,73 @@ def _is_more_specific(first, second):
     return None
 
 
+def _split_mimetype(mimetype_string):
+    """
+    Splits a mimetype string into it's appropriate parts
+
+    :param unicode mimetype_string:
+    :return: A tuple with the first being the list of parts
+        of the mimetype string split and cleaned along ``';'``
+        characters.  The second value is the cleaned up
+        mimetype string without extraneous pieces (extra semi-colons
+        etc.)
+    :rtype: tuple(list[unicode], unicode)
+    """
+    if not mimetype_string:
+        return [], mimetype_string
+    mimetype_string = mimetype_string.strip().strip(';')
+    parts = [part.strip().strip(';') for part in mimetype_string.split(';')]
+    parts = [part for part in parts if part]
+    return parts, mimetype_string
+
+
+def _validate_mimetype_parts(parts):
+    """
+    Validates that the mimetype string contains
+    at least one piece with the first containing a slash
+
+    EXAMPLES:
+
+    raises a ``InvalidMimeType``
+
+    .. code-block:: python
+
+        _validate_mimetype_parts([])
+        _validate_mimetype_parts(["notvalid"])
+
+
+    No exception
+
+    .. code-block:: python
+
+        _validate_mimetype_parts(["application/json"])
+        _validate_mimetype_parts(["application/json", "q=0.5"])
+
+    :param parts: The parts of the mimetype
+    """
+    if not parts:
+        raise InvalidMimeType('Invalid Mimetype.  The mimetype is empty')
+    if len(parts[0].split('/')) < 2:
+        raise InvalidMimeType('Invalid Mimetype: "{}"'.format(parts.join('; ')))
+
+
+class ContentType(object):
+    """
+    Constructs a valid Content-Type object from a Content-Type header
+    according to the Http Specification
+    """
+    def __init__(self, mimetype_string):
+        parts, self._full = _split_mimetype(mimetype_string)
+        _validate_mimetype_parts(parts)
+
+        if len(parts) == 0 or not parts[-1].startswith('charset='):
+            self.mimetype = self._full
+            self.charset = None
+        else:
+            self.mimetype = ';'.join(parts[:-1])
+            self.charset = parts[-1][8:]
+
+
 class MimeType(object):
     """
     A Mimetype object that is comparable.  All comparison operations
@@ -61,16 +128,11 @@ class MimeType(object):
             syntax are also valid.
         :raises InvalidMimeType: If the mimetype is not valid.
         """
-        if not mimetype_string:
-            raise InvalidMimeType('Invalid Mimetype')
-        mimetype_string = mimetype_string.strip().strip(';')
-        self._full = mimetype_string
-        parts = [part.strip().strip(';') for part in mimetype_string.split(';')]
-        parts = [part for part in parts if part]
-        if not parts or len(parts[0].split('/')) < 2:
-            raise InvalidMimeType('Invalid Mimetype')
+        parts, self._full = _split_mimetype(mimetype_string)
+        _validate_mimetype_parts(parts)
+
         if len(parts) == 1 or not parts[-1].startswith('q='):
-            self.mimetype = mimetype_string
+            self.mimetype = self._full
             self.weight = 1.0
         else:
             try:
@@ -84,7 +146,7 @@ class MimeType(object):
         """
         :param MimeType other: The MimeType to compare
         :return: A boolean indicating if the MimeType is equal
-            equal in precidence
+            in precedence
         :rtype: bool
         """
         if not other:
